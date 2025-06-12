@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Повелители стихий | Онлайн-игра</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #4facfe;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+        
+        .elements {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .element {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .element:hover {
+            transform: translateY(-10px);
+        }
+        
+        .fire {
+            background: linear-gradient(45deg, #f46b45, #eea849);
+            box-shadow: 0 10px 20px rgba(238, 168, 73, 0.3);
+        }
+        
+        .water {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            box-shadow: 0 10px 20px rgba(33, 147, 176, 0.3);
+        }
+        
+        .earth {
+            background: linear-gradient(45deg, #a8e063, #56ab2f);
+            box-shadow: 0 10px 20px rgba(86, 171, 47, 0.3);
+        }
+        
+        .air {
+            background: linear-gradient(45deg, #8e9eab, #eef2f3);
+            box-shadow: 0 10px 20px rgba(142, 158, 171, 0.3);
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        footer { text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Повелители стихий</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Играть</a></li>
+                    <li><a href="#">Герои</a></li>
+                    <li><a href="#">Рейтинг</a></li>
+                    <li><a href="#">О нас</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main class="main-content">
+            <h1>Стань Повелителем Стихий</h1>
+            <p class="subtitle">
+                Войдите в удивительный мир, где четыре стихии сходятся в битве за господство. 
+                Выберите свою стихию, развивайте способности и станьте самым могущественным 
+                повелителем в истории!
+            </p>
+            
+            <div class="elements">
+                <div class="element fire" onclick="selectElement('fire')">Огонь</div>
+                <div class="element water" onclick="selectElement('water')">Вода</div>
+                <div class="element earth" onclick="selectElement('earth')">Земля</div>
+                <div class="element air" onclick="selectElement('air')">Воздух</div>
+            </div>
+            
+            <button class="btn" onclick="startGame()">Начать игру</button>
+        </main>
+        
+        <footer>
+            <p>© 2025 Повелители стихий. Все права защищены.</p>
+        </footer>
+    </div>
+    
+    <script>
+        let selectedElement = null;
+        
+        function selectElement(element) {
+            selectedElement = element;
+            
+            // Убираем выделение у всех элементов
+            document.querySelectorAll('.element').forEach(el => {
+                el.style.transform = 'translateY(0)';
+                el.style.boxShadow = el.style.boxShadow; // сохраняем тень
+            });
+            
+            // Выделяем выбранный элемент
+            const selected = document.querySelector(`.${element}`);
+            selected.style.transform = 'translateY(-15px)';
+            selected.style.boxShadow = `0 20px 30px ${getElementShadowColor(element)}`;
+            
+            console.log(`Выбрана стихия: ${element}`);
+        }
+        
+        function getElementShadowColor(element) {
+            const colors = {
+                fire: 'rgba(238, 168, 73, 0.5)',
+                water: 'rgba(33, 147, 176, 0.5)',
+                earth: 'rgba(86, 171, 47, 0.5)',
+                air: 'rgba(142, 158, 171, 0.5)'
+            };
+            return colors[element];
+        }
+        
+        function startGame() {
+            if (!selectedElement) {
+                alert('Пожалуйста, выберите свою стихию перед началом игры!');
+                return;
+            }
+            
+            alert(`Игра начинается! Вы выбрали стихию: ${selectedElement}`);
+            // Здесь будет переход на страницу игры
+            // window.location.href = `game.html?element=${selectedElement}`;
+        }
+    </script>
+</body>
+</html>
